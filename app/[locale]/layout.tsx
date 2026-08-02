@@ -2,12 +2,12 @@ export async function generateStaticParams() {
   return [{ locale: 'en' }, { locale: 'ar' }];
 }
 
-export default function LocaleLayout({
+export default async function LocaleLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
   return (
     <>
