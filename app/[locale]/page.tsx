@@ -1,6 +1,7 @@
 import { getDictionary, type Locale } from '@/lib/i18n';
 import { programs, impactStats, news } from '@/lib/mockData';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default async function Home({
   params,
@@ -14,54 +15,46 @@ export default async function Home({
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#f9f7f4] via-[#fafaf8] to-[#f5f1e6] overflow-hidden py-24 md:py-40">
-        <div className="container-xl relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+      {/* Hero */}
+      <section style={{ background: 'linear-gradient(135deg, #f9f7f4, #fafaf8, #f5f1e6)', padding: '80px 32px', position: 'relative' }}>
+        <div style={{ maxWidth: '1500px', margin: '0 auto' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center' }}>
             <div>
-              <div className="flex items-center gap-4 mb-10">
-                <div className="w-12 h-px bg-[#d4af37]"></div>
-                <span className="text-[#a89830] text-xs font-semibold tracking-[1px] uppercase">{dict.hero.eyebrow}</span>
+              <div style={{ marginBottom: '40px' }}>
+                <span style={{ color: '#d4af37', fontSize: '12px', fontWeight: '600', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                  {dict.hero.eyebrow}
+                </span>
               </div>
-
-              <h1 className="text-5xl md:text-6xl xl:text-7xl mb-10 leading-[1.15] text-[#0a1428]" style={{ fontFamily: 'var(--font-marcellus)' }}>
+              <h1 style={{ fontSize: '72px', fontWeight: '400', lineHeight: '1.15', color: '#0a1428', marginBottom: '32px', fontFamily: 'var(--font-marcellus)' }}>
                 {dict.hero.title}
               </h1>
-
-              <p className="text-lg md:text-xl text-[#3d3d3d] mb-12 leading-relaxed font-light max-w-xl">
+              <p style={{ fontSize: '18px', color: '#3d3d3d', marginBottom: '48px', lineHeight: '1.8', maxWidth: '600px' }}>
                 {dict.hero.intro1}
-                <span className="text-[#a89830] font-semibold">{dict.hero.introHighlight}</span>
+                <span style={{ color: '#d4af37', fontWeight: '600' }}> {dict.hero.introHighlight} </span>
                 {dict.hero.intro2}
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-5 mb-16">
-                <Link
-                  href={`${base}/get-involved/donate`}
-                  className="px-12 py-4 bg-[#0a1428] text-white font-bold rounded-sm hover:bg-[#142850] transition duration-400 uppercase tracking-[1px] text-sm text-center shadow-elegant hover:shadow-premium"
-                >
+              <div style={{ display: 'flex', gap: '24px', marginBottom: '48px', flexWrap: 'wrap' }}>
+                <Link href={`${base}/get-involved/donate`} style={{ padding: '16px 32px', backgroundColor: '#0a1428', color: 'white', textDecoration: 'none', fontSize: '14px', fontWeight: '700', borderRadius: '4px', cursor: 'pointer', transition: 'all 0.3s' }}>
                   {dict.hero.ctaDonate}
                 </Link>
-                <Link
-                  href={`${base}/about/mission`}
-                  className="px-12 py-4 border-2 border-[#0a1428] text-[#0a1428] font-bold rounded-sm hover:border-[#d4af37] hover:bg-[#f9f7f4] transition duration-400 uppercase tracking-[1px] text-sm text-center"
-                >
+                <Link href={`${base}/about/mission`} style={{ padding: '16px 32px', border: '2px solid #0a1428', color: '#0a1428', textDecoration: 'none', fontSize: '14px', fontWeight: '700', borderRadius: '4px', cursor: 'pointer', transition: 'all 0.3s' }}>
                   {dict.hero.ctaMission}
                 </Link>
               </div>
 
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-8 border-t border-[#e8e4db] pt-10">
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '48px', borderTop: '1px solid #e8e4db', paddingTop: '40px', maxWidth: '400px' }}>
                 <div>
-                  <p className="text-3xl md:text-4xl text-[#0a1428] mb-0" style={{ fontFamily: 'var(--font-marcellus)' }}>30+</p>
-                  <p className="text-xs text-[#6b6b6b] mt-2 uppercase tracking-[1px] mb-0">{dict.hero.statCountries}</p>
+                  <p style={{ fontSize: '32px', color: '#0a1428', fontWeight: '400', fontFamily: 'var(--font-marcellus)', marginBottom: '8px' }}>30+</p>
+                  <p style={{ fontSize: '11px', color: '#6b6b6b', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: '600', margin: 0 }}>{dict.hero.statCountries}</p>
                 </div>
                 <div>
-                  <p className="text-3xl md:text-4xl text-[#0a1428] mb-0" style={{ fontFamily: 'var(--font-marcellus)' }}>75k+</p>
-                  <p className="text-xs text-[#6b6b6b] mt-2 uppercase tracking-[1px] mb-0">{dict.hero.statFamilies}</p>
+                  <p style={{ fontSize: '32px', color: '#0a1428', fontWeight: '400', fontFamily: 'var(--font-marcellus)', marginBottom: '8px' }}>75k+</p>
+                  <p style={{ fontSize: '11px', color: '#6b6b6b', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: '600', margin: 0 }}>{dict.hero.statFamilies}</p>
                 </div>
                 <div>
-                  <p className="text-3xl md:text-4xl text-[#0a1428] mb-0" style={{ fontFamily: 'var(--font-marcellus)' }}>2.5k+</p>
-                  <p className="text-xs text-[#6b6b6b] mt-2 uppercase tracking-[1px] mb-0">{dict.hero.statVolunteers}</p>
+                  <p style={{ fontSize: '32px', color: '#0a1428', fontWeight: '400', fontFamily: 'var(--font-marcellus)', marginBottom: '8px' }}>2.5k+</p>
+                  <p style={{ fontSize: '11px', color: '#6b6b6b', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: '600', margin: 0 }}>{dict.hero.statVolunteers}</p>
                 </div>
               </div>
             </div>
@@ -69,118 +62,107 @@ export default async function Home({
         </div>
       </section>
 
-      {/* Patronage Band */}
-      <section className="bg-[#0a1428] py-12 border-b border-[#d4af37]/30">
-        <div className="container-lg text-center">
-          <p className="text-[#d4af37] text-xs tracking-[2px] uppercase mb-4">{dict.patronage.label}</p>
-          <p className="text-white text-xl md:text-2xl mb-0 leading-relaxed" style={{ fontFamily: ar ? 'var(--font-amiri)' : 'var(--font-marcellus)' }}>
-            {dict.patronage.statement}
-          </p>
+      {/* Patronage */}
+      <section style={{ backgroundColor: '#0a1428', padding: '48px 32px', textAlign: 'center', borderBottom: '1px solid rgba(212,175,55,0.2)' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <p style={{ color: '#d4af37', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase', fontWeight: '600', marginBottom: '16px' }}>{dict.patronage.label}</p>
+          <p style={{ color: 'white', fontSize: '20px', lineHeight: '1.8', fontFamily: 'var(--font-marcellus)' }}>{dict.patronage.statement}</p>
         </div>
       </section>
 
-      {/* Impact Stats Section */}
-      <section className="py-32 bg-gradient-to-b from-[#0a1428] to-[#142850] relative overflow-hidden">
-        <div className="container-lg relative z-10">
-          <div className="text-center mb-24">
-            <div className="flex justify-center mb-8">
-              <div className="flex items-center gap-4">
-                <div className="w-8 h-px bg-[#d4af37]"></div>
-                <span className="text-[#d4af37] text-xs font-semibold tracking-[2px] uppercase">{dict.impact.label}</span>
-                <div className="w-8 h-px bg-[#d4af37]"></div>
-              </div>
-            </div>
-
-            <h2 className="text-4xl md:text-5xl mb-8 text-white leading-tight">
-              {dict.impact.titlePre}<span className="text-[#d4af37]">{dict.impact.titleAccent}</span>
+      {/* Impact */}
+      <section style={{ background: 'linear-gradient(180deg, #0a1428, #142850)', padding: '96px 32px', position: 'relative' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+            <p style={{ color: '#d4af37', fontSize: '12px', letterSpacing: '2px', textTransform: 'uppercase', fontWeight: '600', marginBottom: '24px' }}>{dict.impact.label}</p>
+            <h2 style={{ fontSize: '48px', fontWeight: '400', color: 'white', marginBottom: '24px', fontFamily: 'var(--font-marcellus)' }}>
+              {dict.impact.titlePre} <span style={{ color: '#d4af37' }}>{dict.impact.titleAccent}</span>
             </h2>
-
-            <p className="text-lg text-gray-200 max-w-2xl mx-auto mb-0">{dict.impact.subtitle}</p>
+            <p style={{ fontSize: '16px', color: '#ccc', maxWidth: '600px', margin: '0 auto', lineHeight: '1.8' }}>{dict.impact.subtitle}</p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '24px' }}>
             {impactStats.map((stat, idx) => (
-              <div key={idx} className="group">
-                <div className="bg-white/5 backdrop-blur-md border border-[#d4af37]/30 p-8 rounded-lg hover:border-[#d4af37] hover:bg-white/10 transition duration-500 h-full flex flex-col items-center justify-center text-center">
-                  <div className="w-8 h-px bg-[#d4af37] mb-6"></div>
-                  <p className="text-4xl text-[#d4af37] mb-2" style={{ fontFamily: 'var(--font-marcellus)' }} dir="ltr">{stat.value}</p>
-                  <p className="text-gray-300 text-sm font-light tracking-wide uppercase mb-0">{ar ? stat.labelAr : stat.label}</p>
-                </div>
+              <div key={idx} style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(212,175,55,0.3)', padding: '32px', borderRadius: '8px', textAlign: 'center', transition: 'all 0.3s' }}>
+                <div style={{ width: '8px', height: '2px', backgroundColor: '#d4af37', margin: '0 auto 24px', borderRadius: '1px' }}></div>
+                <p style={{ fontSize: '36px', color: '#d4af37', marginBottom: '8px', fontFamily: 'var(--font-marcellus)', fontWeight: '400' }} dir="ltr">{stat.value}</p>
+                <p style={{ fontSize: '12px', color: '#aaa', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: '600', margin: 0 }}>{ar ? stat.labelAr : stat.label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Programs Section */}
-      <section className="py-32 bg-white relative">
-        <div className="container-lg relative z-10">
-          <div className="text-center mb-24">
-            <h2 className="text-4xl md:text-5xl mb-8 text-[#0a1428] leading-tight">
-              {dict.programs.titlePre}<span className="text-[#a89830]">{dict.programs.titleAccent}</span>
+      {/* Programs */}
+      <section style={{ backgroundColor: 'white', padding: '96px 32px' }}>
+        <div style={{ maxWidth: '1500px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+            <p style={{ color: '#a89830', fontSize: '12px', letterSpacing: '2px', textTransform: 'uppercase', fontWeight: '600', marginBottom: '16px' }}>{dict.programs.label}</p>
+            <h2 style={{ fontSize: '48px', fontWeight: '400', color: '#0a1428', marginBottom: '24px', fontFamily: 'var(--font-marcellus)' }}>
+              {dict.programs.titlePre} <span style={{ color: '#a89830' }}>{dict.programs.titleAccent}</span>
             </h2>
-            <p className="text-lg text-[#3d3d3d] max-w-2xl mx-auto mb-0">{dict.programs.subtitle}</p>
+            <p style={{ fontSize: '16px', color: '#3d3d3d', maxWidth: '600px', margin: '0 auto', lineHeight: '1.8' }}>{dict.programs.subtitle}</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px', marginBottom: '48px' }}>
             {programs.slice(0, 6).map((program) => (
-              <Link key={program.id} href={`${base}/programs/${program.slug}`} className="group">
-                <div className="bg-white border border-[#e8e4db] rounded-lg overflow-hidden hover:border-[#d4af37] transition duration-500 h-full flex flex-col shadow-elegant hover:shadow-premium">
-                  <div className="relative h-48 w-full overflow-hidden bg-gradient-to-br from-[#0a1428] to-[#142850]">
-                    <div className="w-full h-full flex items-center justify-center text-gray-600">Image</div>
+              <Link key={program.id} href={`${base}/programs/${program.slug}`} style={{ textDecoration: 'none' }}>
+                <div style={{ backgroundColor: 'white', border: '1px solid #e8e4db', borderRadius: '8px', overflow: 'hidden', cursor: 'pointer', transition: 'all 0.4s', height: '100%', display: 'flex', flexDirection: 'column', boxShadow: '0 2px 8px rgba(10,20,40,0.08)' }}>
+                  <div style={{ position: 'relative', height: '200px', backgroundColor: '#f0f0f0' }}>
+                    <div style={{ width: '100%', height: '100%', backgroundColor: '#e8e4db', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#999' }}>Image</div>
                   </div>
-                  <div className="flex-1 p-10 flex flex-col">
-                    <h3 className="text-2xl text-[#0a1428] mb-4 group-hover:text-[#a89830] transition">
+                  <div style={{ flex: 1, padding: '32px', display: 'flex', flexDirection: 'column' }}>
+                    <h3 style={{ fontSize: '18px', fontWeight: '600', color: '#0a1428', marginBottom: '12px', lineHeight: '1.4' }}>
                       {ar ? program.nameAr : program.name}
                     </h3>
-                    <p className="text-[#6b6b6b] text-base font-light flex-grow mb-6">
+                    <p style={{ fontSize: '14px', color: '#6b6b6b', lineHeight: '1.6', flex: 1, marginBottom: '16px' }}>
                       {ar ? program.descriptionAr : program.description}
                     </p>
-                    <p className="text-[#a89830] font-semibold text-sm tracking-wide uppercase mb-0">
-                      {ar ? program.impactAr : program.impact}
-                    </p>
+                    <div style={{ borderTop: '1px solid #e8e4db', paddingTop: '16px' }}>
+                      <p style={{ fontSize: '12px', color: '#d4af37', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 0 }}>
+                        {ar ? program.impactAr : program.impact}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </Link>
             ))}
           </div>
 
-          <div className="text-center">
-            <Link
-              href={`${base}/programs`}
-              className="inline-block px-16 py-5 bg-[#0a1428] text-white font-bold rounded-sm hover:bg-[#142850] transition duration-500 uppercase tracking-[1px] text-sm shadow-elegant hover:shadow-premium"
-            >
-              {dict.programs.exploreAll}
+          <div style={{ textAlign: 'center' }}>
+            <Link href={`${base}/programs`} style={{ padding: '12px 32px', backgroundColor: '#0a1428', color: 'white', textDecoration: 'none', borderRadius: '4px', fontWeight: '600', fontSize: '14px', display: 'inline-block' }}>
+              View All Programs
             </Link>
           </div>
         </div>
       </section>
 
-      {/* News Section */}
-      <section className="py-32 bg-gradient-to-b from-white via-[#f9f7f4] to-[#f5f1e6] relative">
-        <div className="container-lg relative z-10">
-          <div className="text-center mb-24">
-            <h2 className="text-4xl md:text-5xl mb-8 text-[#0a1428] leading-tight">
-              {dict.news.titlePre}<span className="text-[#a89830]">{dict.news.titleAccent}</span>
+      {/* News */}
+      <section style={{ background: 'linear-gradient(180deg, white, #f9f7f4, #f5f1e6)', padding: '96px 32px' }}>
+        <div style={{ maxWidth: '1500px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '80px' }}>
+            <p style={{ color: '#a89830', fontSize: '12px', letterSpacing: '2px', textTransform: 'uppercase', fontWeight: '600', marginBottom: '16px' }}>{dict.news.label}</p>
+            <h2 style={{ fontSize: '48px', fontWeight: '400', color: '#0a1428', marginBottom: '24px', fontFamily: 'var(--font-marcellus)' }}>
+              {dict.news.titlePre} <span style={{ color: '#a89830' }}>{dict.news.titleAccent}</span>
             </h2>
-            <p className="text-lg text-[#3d3d3d] max-w-2xl mx-auto mb-0">{dict.news.subtitle}</p>
+            <p style={{ fontSize: '16px', color: '#3d3d3d', maxWidth: '600px', margin: '0 auto', lineHeight: '1.8' }}>{dict.news.subtitle}</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px' }}>
             {news.slice(0, 3).map((article) => (
-              <Link key={article.id} href={`${base}/news/${article.slug}`} className="group">
-                <div className="bg-white border border-[#e8e4db] rounded-lg overflow-hidden hover:border-[#d4af37] transition duration-500 h-full flex flex-col shadow-elegant hover:shadow-premium">
-                  <div className="relative h-44 w-full overflow-hidden bg-gradient-to-br from-[#0a1428] to-[#142850]">
-                    <div className="w-full h-full flex items-center justify-center text-gray-600">Image</div>
+              <Link key={article.id} href={`${base}/news/${article.slug}`} style={{ textDecoration: 'none' }}>
+                <div style={{ backgroundColor: 'white', border: '1px solid #e8e4db', borderRadius: '8px', overflow: 'hidden', cursor: 'pointer', transition: 'all 0.4s', height: '100%', display: 'flex', flexDirection: 'column', boxShadow: '0 2px 8px rgba(10,20,40,0.08)' }}>
+                  <div style={{ position: 'relative', height: '200px', backgroundColor: '#f0f0f0' }}>
+                    <div style={{ width: '100%', height: '100%', backgroundColor: '#e8e4db', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#999' }}>Image</div>
                   </div>
-                  <div className="flex-1 p-10 flex flex-col">
-                    <span className="text-[#a89830] text-xs font-semibold tracking-[1px] uppercase mb-4" dir="ltr">
+                  <div style={{ flex: 1, padding: '32px', display: 'flex', flexDirection: 'column' }}>
+                    <p style={{ fontSize: '11px', color: '#d4af37', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '8px' }} dir="ltr">
                       {article.date.toLocaleDateString(ar ? 'ar-JO' : 'en-US')}
-                    </span>
-                    <h3 className="text-2xl text-[#0a1428] mb-4 group-hover:text-[#a89830] transition">
+                    </p>
+                    <h3 style={{ fontSize: '18px', fontWeight: '600', color: '#0a1428', marginBottom: '12px', lineHeight: '1.4' }}>
                       {ar ? article.titleAr : article.title}
                     </h3>
-                    <p className="text-[#6b6b6b] text-base font-light flex-grow mb-0">
+                    <p style={{ fontSize: '14px', color: '#6b6b6b', lineHeight: '1.6', flex: 1 }}>
                       {ar ? article.excerptAr : article.excerpt}
                     </p>
                   </div>
