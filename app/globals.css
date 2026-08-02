@@ -1,26 +1,252 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Royal palette */
+  --gold-primary: #d4af37;
+  --gold-light: #e8c547;
+  --gold-dark: #a89830;
+
+  --navy-deep: #0a1428;
+  --navy-royal: #142850;
+  --navy-medium: #1a3a5c;
+
+  --cream-luxury: #f9f7f4;
+  --ivory: #fffbf8;
+  --champagne: #f5f0e8;
+
+  --red-charity: #a8312f;
+
+  /* Elegant grays */
+  --white: #ffffff;
+  --charcoal: #0f0f0f;
+  --gray-dark: #3d3d3d;
+  --gray-medium: #6b6b6b;
+  --gray-light: #a8a8a8;
+  --border-light: #e8e4db;
+  --shadow-light: rgba(10, 20, 40, 0.08);
+  --shadow-medium: rgba(10, 20, 40, 0.15);
+
+  --text-primary: #0f0f0f;
+  --text-secondary: #3d3d3d;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ---------- Base styles (must live in the base layer so
+   Tailwind utilities can override them) ---------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    font-family: var(--font-almarai), 'Segoe UI', Tahoma, sans-serif;
+    color: var(--text-primary);
+    background: var(--cream-luxury);
+    line-height: 1.8;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+
+  /* Arabic script must never be letter-spaced */
+  [dir="rtl"] body {
+    letter-spacing: 0;
+  }
+
+  [dir="rtl"] * {
+    letter-spacing: 0 !important;
+  }
+
+  /* Marcellus is a single-weight (400) inscriptional face —
+     headings must never be synthetically bolded */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-marcellus), 'Times New Roman', serif;
+    font-weight: 400 !important;
+    color: var(--navy-deep);
+    letter-spacing: 0.5px;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Arabic headlines use Amiri (classical Naskh) */
+  [dir="rtl"] h1, [dir="rtl"] h2, [dir="rtl"] h3, [dir="rtl"] h4, [dir="rtl"] h5, [dir="rtl"] h6,
+  h1:lang(ar), h2:lang(ar), h3:lang(ar), h4:lang(ar), h5:lang(ar), h6:lang(ar) {
+    font-family: var(--font-amiri), 'Traditional Arabic', serif;
+    font-weight: 700 !important;
+    letter-spacing: 0;
+    line-height: 1.6;
+  }
+
+  h1 {
+    font-size: 3.75rem;
+    line-height: 1.15;
+    margin-bottom: 2rem;
+  }
+
+  h2 {
+    font-size: 2.75rem;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+  }
+
+  h3 {
+    font-size: 1.75rem;
+    line-height: 1.35;
+    margin-bottom: 1.5rem;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.8px;
+  }
+
+  p {
+    line-height: 1.9;
+    color: var(--text-secondary);
+    margin-bottom: 1.6rem;
+    font-size: 1.05rem;
+  }
+
+  a {
+    text-decoration: none;
+    transition: all 0.4s ease;
+  }
+
+  button {
+    font-family: var(--font-almarai), sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    letter-spacing: 0.5px;
+  }
+
+  /* Accessibility: visible keyboard-focus ring on every interactive
+     element, invisible on mouse/touch interaction */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--gold-primary);
+    outline-offset: 2px;
+    border-radius: 2px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ---------- Custom utilities (participate in the utility
+   layer so hover:/md: variants work) ---------- */
+@utility shadow-elegant {
+  box-shadow: 0 4px 20px var(--shadow-light);
+}
+
+@utility shadow-premium {
+  box-shadow: 0 8px 40px var(--shadow-medium);
+}
+
+@utility shadow-luxury {
+  box-shadow: 0 10px 50px rgba(10, 20, 40, 0.12), 0 2px 8px rgba(10, 20, 40, 0.08);
+}
+
+/* ---------- Layout & component classes ---------- */
+@layer components {
+  .container-lg {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .container-xl {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .section-padding {
+    padding: 7rem 0;
+  }
+
+  .section-padding-lg {
+    padding: 9rem 0;
+  }
+
+  .section-padding-xl {
+    padding: 11rem 0;
+  }
+
+  .ornamental-divider {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(to right, var(--gold-primary), rgba(212, 175, 55, 0.3), transparent);
+    margin: 2.5rem 0;
+  }
+
+  .ornamental-divider-center {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--gold-primary), transparent);
+    margin: 2.5rem auto;
+  }
+
+  .elegant-spacing {
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--gold-dark);
+    font-family: var(--font-almarai), sans-serif;
+  }
+
+  .accent-gold {
+    color: var(--gold-primary);
+  }
+
+  .accent-navy {
+    color: var(--navy-deep);
+  }
+
+  .border-gold-top {
+    border-top: 2px solid var(--gold-primary);
+  }
+
+  .border-gold-bottom {
+    border-bottom: 2px solid var(--gold-primary);
+  }
+
+  .border-gold-left {
+    border-left: 4px solid var(--gold-primary);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideInUp 0.8s ease-out;
 }

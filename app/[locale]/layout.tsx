@@ -1,4 +1,6 @@
 import { Locale } from '@/lib/i18n';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export async function generateStaticParams() {
   return [{ locale: 'en' }, { locale: 'ar' }];
@@ -15,10 +17,12 @@ export default async function LocaleLayout({
   const isArabic = locale === 'ar';
 
   return (
-    <html lang={locale} dir={isArabic ? 'rtl' : 'ltr'}>
-      <body style={{ margin: 0, padding: 0, fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif', backgroundColor: '#fff' }}>
+    <>
+      <Header locale={locale as Locale} />
+      <main>
         {children}
-      </body>
-    </html>
+      </main>
+      <Footer locale={locale as Locale} />
+    </>
   );
 }
