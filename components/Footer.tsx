@@ -56,12 +56,12 @@ const Footer = ({ locale }: { locale: Locale }) => {
   };
 
   return (
-    <footer className="bg-[#0a1428] text-white">
-      <div className="container-lg py-16 border-b border-[#d4af37]/30">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-8">
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold text-[#d4af37]">JHCO</h3>
-            <p className="text-sm text-gray-300">
+    <footer style={{ backgroundColor: '#0a1428', color: 'white' }}>
+      <div style={{ maxWidth: '1500px', margin: '0 auto', padding: '64px 32px', borderBottom: '1px solid rgba(212, 175, 55, 0.3)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '32px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <h3 style={{ fontSize: '20px', fontWeight: 'bold', color: '#d4af37', margin: 0 }}>JHCO</h3>
+            <p style={{ fontSize: '14px', color: '#ccc', lineHeight: '1.6', margin: 0 }}>
               {ar
                 ? 'الهيئة الخيرية الأردنية الهاشمية - تغيير الحياة من خلال العمل الإنساني'
                 : 'Jordan Hashemite Charity Organization - Changing lives through humanitarian action'}
@@ -69,12 +69,15 @@ const Footer = ({ locale }: { locale: Locale }) => {
           </div>
 
           {Object.entries(sections).map(([key, section]) => (
-            <div key={key} className="space-y-4">
-              <h4 className="font-bold text-[#d4af37]">{section.title}</h4>
-              <ul className="space-y-2">
+            <div key={key} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <h4 style={{ fontSize: '15px', fontWeight: 'bold', color: '#d4af37', margin: 0 }}>{section.title}</h4>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 {section.links.map((link, i) => (
                   <li key={i}>
-                    <Link href={link.href} className="text-sm text-gray-300 hover:text-[#d4af37] transition">
+                    <Link href={link.href} style={{ fontSize: '13px', color: '#ccc', textDecoration: 'none', transition: 'color 0.2s', cursor: 'pointer' }}
+                      onMouseEnter={(e) => e.currentTarget.style.color = '#d4af37'}
+                      onMouseLeave={(e) => e.currentTarget.style.color = '#ccc'}
+                    >
                       {link.label}
                     </Link>
                   </li>
@@ -85,7 +88,7 @@ const Footer = ({ locale }: { locale: Locale }) => {
         </div>
       </div>
 
-      <div className="container-lg py-8 text-center text-sm text-gray-400">
+      <div style={{ maxWidth: '1500px', margin: '0 auto', padding: '32px', textAlign: 'center', fontSize: '13px', color: '#999' }}>
         <p>© 2026 JHCO. {ar ? 'جميع الحقوق محفوظة' : 'All rights reserved'}</p>
       </div>
     </footer>

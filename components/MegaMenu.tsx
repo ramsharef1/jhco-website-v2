@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import type { Locale } from '@/lib/i18n';
-import { COMPLETE_SITEMAP } from '@/lib/sitemapData';
 
 interface MegaMenuProps {
   locale: Locale;
@@ -12,156 +11,154 @@ export default function MegaMenu({ locale }: MegaMenuProps) {
   const ar = locale === 'ar';
   const base = `/${locale}`;
 
-  const governmentPages = [
-    { id: 'media-center', label: 'Media Center', labelAr: 'مركز الإعلام', icon: '📰', description: 'Press releases & media kit', descriptionAr: 'البيانات الصحفية ومجموعة الإعلام' },
-    { id: 'reports', label: 'Reports & Transparency', labelAr: 'التقارير والشفافية', icon: '📊', description: 'Annual reports & audits', descriptionAr: 'التقارير السنوية والتدقيق' },
-    { id: 'partnerships', label: 'Partnerships', labelAr: 'الشراكات', icon: '🤝', description: 'Government & UN partners', descriptionAr: 'شركاء حكوميون وأمميون' },
-    { id: 'operations', label: 'Operations', labelAr: 'العمليات', icon: '🌍', description: 'Global programs & data', descriptionAr: 'البرامج العالمية والبيانات' },
-    { id: 'compliance', label: 'Compliance & Legal', labelAr: 'الامتثال والقانونية', icon: '⚖️', description: 'Privacy & governance', descriptionAr: 'الخصوصية والحوكمة' },
-    { id: 'announcements', label: 'Announcements', labelAr: 'الإعلانات', icon: '👑', description: 'Official notices & decrees', descriptionAr: 'الإشعارات الرسمية والمراسيم' },
-  ];
-
-  const mainItems = COMPLETE_SITEMAP.filter(item =>
-    ['programs', 'about', 'impact', 'get-involved', 'news-resources', 'regions', 'support'].includes(item.id)
-  );
+  const sections = {
+    government: {
+      icon: '👑',
+      title: ar ? 'الحكومة' : 'Government',
+      subtitle: ar ? 'الشفافية والمساءلة' : 'Transparency & Accountability',
+      links: [
+        { icon: '📰', label: ar ? 'مركز الإعلام' : 'Media Center', href: `${base}/media-center` },
+        { icon: '📊', label: ar ? 'التقارير' : 'Reports', href: `${base}/reports` },
+        { icon: '⚖️', label: ar ? 'الامتثال' : 'Compliance', href: `${base}/compliance` },
+        { icon: '👑', label: ar ? 'الإعلانات' : 'Announcements', href: `${base}/announcements` },
+      ],
+    },
+    care: {
+      icon: '🏥',
+      title: ar ? 'الرعاية' : 'Care',
+      subtitle: ar ? 'البرامج الإنسانية' : 'Humanitarian Programs',
+      links: [
+        { icon: '🚨', label: ar ? 'الأزمات' : 'Crisis Response', href: `${base}/programs/gaza-aid` },
+        { icon: '💊', label: ar ? 'الصحة' : 'Healthcare', href: `${base}/programs/healthcare` },
+        { icon: '🍽️', label: ar ? 'الغذاء' : 'Food Aid', href: `${base}/programs/food-aid` },
+        { icon: '🏠', label: ar ? 'المأوى' : 'Shelter', href: `${base}/programs/shelter` },
+      ],
+    },
+    education: {
+      icon: '📚',
+      title: ar ? 'التعليم' : 'Education',
+      subtitle: ar ? 'فرص التعلم' : 'Learning Opportunities',
+      links: [
+        { icon: '🎓', label: ar ? 'منح دراسية' : 'Scholarships', href: `${base}/programs/education` },
+        { icon: '👶', label: ar ? 'التعليم المبكر' : 'Early Learning', href: `${base}/programs/early-learning` },
+        { icon: '💻', label: ar ? 'تدريب مهني' : 'Vocational Training', href: `${base}/programs/vocational-training` },
+        { icon: '📖', label: ar ? 'محو الأمية' : 'Literacy', href: `${base}/programs/literacy` },
+      ],
+    },
+    partnerships: {
+      icon: '🤝',
+      title: ar ? 'الشراكات' : 'Partnerships',
+      subtitle: ar ? 'التعاون العالمي' : 'Global Cooperation',
+      links: [
+        { icon: '🌍', label: ar ? 'الشركاء' : 'Our Partners', href: `${base}/partnerships` },
+        { icon: '🏢', label: ar ? 'العمليات' : 'Operations', href: `${base}/operations` },
+        { icon: '📈', label: ar ? 'التأثير' : 'Impact', href: `${base}/news` },
+        { icon: '💬', label: ar ? 'الشهادات' : 'Testimonials', href: `${base}/contact` },
+      ],
+    },
+    about: {
+      icon: 'ℹ️',
+      title: ar ? 'عن الهيئة' : 'About',
+      subtitle: ar ? 'من نحن' : 'Who We Are',
+      links: [
+        { icon: '🎯', label: ar ? 'مهمتنا' : 'Our Mission', href: `${base}/about/mission` },
+        { icon: '📋', label: ar ? 'رؤيتنا' : 'Our Vision', href: `${base}/about/mission` },
+        { icon: '👥', label: ar ? 'الفريق' : 'Our Team', href: `${base}/about/mission` },
+        { icon: '⭐', label: ar ? 'القيم' : 'Our Values', href: `${base}/about/mission` },
+      ],
+    },
+    getInvolved: {
+      icon: '❤️',
+      title: ar ? 'شارك معنا' : 'Get Involved',
+      subtitle: ar ? 'انضم إلى المهمة' : 'Join Our Mission',
+      links: [
+        { icon: '💝', label: ar ? 'تبرع' : 'Donate', href: `${base}/get-involved/donate` },
+        { icon: '🤝', label: ar ? 'تطوع' : 'Volunteer', href: `${base}/get-involved/volunteer` },
+        { icon: '📢', label: ar ? 'انشر الخبر' : 'Spread the Word', href: `${base}/contact` },
+        { icon: '📞', label: ar ? 'اتصل بنا' : 'Contact Us', href: `${base}/contact` },
+      ],
+    },
+  };
 
   return (
-    <div className="w-full bg-gradient-to-b from-[#0a1428] to-[#0d1a2a] text-white border-y-2 border-[#d4af37]">
-      <div className="container-lg py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-          {/* Government & Transparency Section */}
-          <div className="space-y-4 lg:col-span-1">
-            <div className="flex items-center gap-3 mb-6 group">
-              <span className="text-4xl group-hover:scale-110 transition-transform">👑</span>
-              <div>
-                <h3 className="text-lg font-bold text-[#d4af37] group-hover:text-white transition-colors">
-                  {ar ? 'الحكومية' : 'Government'}
-                </h3>
-                <p className="text-xs text-gray-400 mt-1">
-                  {ar ? 'الشفافية والمساءلة' : 'Transparency & Accountability'}
-                </p>
-              </div>
-            </div>
-
-            <ul className="space-y-2 border-t border-[#d4af37]/20 pt-4">
-              {governmentPages.map(page => (
-                <li key={page.id}>
-                  <Link
-                    href={`${base}/${page.id}`}
-                    className="flex items-start gap-2 px-3 py-2 rounded hover:bg-[#d4af37]/10 transition-all group"
-                  >
-                    <span className="text-lg mt-0.5 group-hover:scale-110 transition-transform flex-shrink-0">{page.icon}</span>
-                    <div className="flex-1">
-                      <div className="text-sm text-gray-200 group-hover:text-[#d4af37] transition-colors font-medium">
-                        {ar ? page.labelAr : page.label}
-                      </div>
-                      <p className="text-xs text-gray-500 mt-0.5 line-clamp-1">
-                        {ar ? page.descriptionAr : page.description}
-                      </p>
-                    </div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {mainItems.map(section => (
-            <div key={section.id} className="space-y-4">
+    <div style={{ width: '100%', backgroundColor: '#0a1428', color: 'white', borderTop: '2px solid #d4af37', borderBottom: '2px solid #d4af37' }}>
+      <div style={{ maxWidth: '1500px', margin: '0 auto', padding: '48px 32px' }}>
+        {/* Main grid - 6 columns */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '48px', marginBottom: '48px' }}>
+          {Object.entries(sections).map(([key, section]) => (
+            <div key={key} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {/* Section Header */}
-              <Link
-                href={`${base}${section.path}`}
-                className="flex items-center gap-3 mb-6 group"
-              >
-                {section.icon && <span className="text-4xl group-hover:scale-110 transition-transform">{section.icon}</span>}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+                <span style={{ fontSize: '32px' }}>{section.icon}</span>
                 <div>
-                  <h3 className="text-lg font-bold text-[#d4af37] group-hover:text-white transition-colors">
-                    {ar ? section.labelAr : section.label}
+                  <h3 style={{ fontSize: '16px', fontWeight: 'bold', color: '#d4af37', margin: '0 0 4px 0' }}>
+                    {section.title}
                   </h3>
-                  {section.description && (
-                    <p className="text-xs text-gray-400 mt-1">
-                      {ar ? section.descriptionAr : section.description}
-                    </p>
-                  )}
+                  <p style={{ fontSize: '11px', color: '#aaa', margin: 0 }}>
+                    {section.subtitle}
+                  </p>
                 </div>
-              </Link>
+              </div>
 
-              {/* Section Items */}
-              {section.children && section.children.length > 0 && (
-                <ul className="space-y-2 border-t border-[#d4af37]/20 pt-4">
-                  {section.children.map(item => (
-                    <li key={item.id}>
-                      <Link
-                        href={`${base}${item.path}`}
-                        className="flex items-start gap-2 px-3 py-2 rounded hover:bg-[#d4af37]/10 transition-all group"
-                      >
-                        {item.icon && <span className="text-lg mt-0.5 group-hover:scale-110 transition-transform flex-shrink-0">{item.icon}</span>}
-                        <div className="flex-1">
-                          <div className="text-sm text-gray-200 group-hover:text-[#d4af37] transition-colors font-medium">
-                            {ar ? item.labelAr : item.label}
-                          </div>
-                          {item.description && (
-                            <p className="text-xs text-gray-500 mt-0.5 line-clamp-1">
-                              {ar ? item.descriptionAr : item.description}
-                            </p>
-                          )}
-                        </div>
-                      </Link>
+              {/* Divider */}
+              <div style={{ height: '1px', backgroundColor: 'rgba(212, 175, 55, 0.2)', marginBottom: '8px' }}></div>
 
-                      {/* Sub-items */}
-                      {item.children && item.children.length > 0 && (
-                        <ul className="ml-6 mt-1 space-y-1 border-l border-[#d4af37]/20 pl-3">
-                          {item.children.slice(0, 4).map(subitem => (
-                            <li key={subitem.id}>
-                              <Link
-                                href={`${base}${subitem.path}`}
-                                className="text-xs text-gray-400 hover:text-[#d4af37] hover:bg-[#d4af37]/5 px-2 py-1 rounded block transition-all"
-                              >
-                                {ar ? subitem.labelAr : subitem.label}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              )}
+              {/* Links */}
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                {section.links.map((link, idx) => (
+                  <li key={idx}>
+                    <Link href={link.href} style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '8px 12px', borderRadius: '4px', textDecoration: 'none', color: '#ccc', fontSize: '13px', transition: 'all 0.2s', cursor: 'pointer' }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = 'rgba(212, 175, 55, 0.1)';
+                        e.currentTarget.style.color = '#d4af37';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = '#ccc';
+                      }}
+                    >
+                      <span style={{ fontSize: '14px' }}>{link.icon}</span>
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
 
         {/* Bottom CTA Section */}
-        <div className="mt-12 pt-8 border-t border-[#d4af37]/30 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Link
-            href={`${base}/get-involved/donate`}
-            className="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-[#a8312f] to-[#8b2f2d] rounded-lg hover:shadow-lg hover:shadow-[#a8312f]/50 transition-all hover:scale-105"
+        <div style={{ borderTop: '1px solid rgba(212, 175, 55, 0.3)', paddingTop: '32px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '24px' }}>
+          <Link href={`${base}/get-involved/donate`} style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '20px 24px', background: 'linear-gradient(135deg, #a8312f, #8b2f2d)', borderRadius: '8px', textDecoration: 'none', color: 'white', transition: 'all 0.3s', cursor: 'pointer' }}
+            onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+            onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
           >
-            <span className="text-3xl">💝</span>
+            <span style={{ fontSize: '28px' }}>💝</span>
             <div>
-              <div className="font-bold text-white">{ar ? 'تبرع الآن' : 'Donate Now'}</div>
-              <p className="text-xs text-gray-300">{ar ? 'ساعد أولئك المحتاجين' : 'Help those in need'}</p>
+              <div style={{ fontWeight: 'bold', fontSize: '15px', marginBottom: '2px' }}>{ar ? 'تبرع الآن' : 'Donate Now'}</div>
+              <p style={{ fontSize: '12px', color: '#ddd', margin: 0 }}>{ar ? 'ساعد أولئك المحتاجين' : 'Help those in need'}</p>
             </div>
           </Link>
 
-          <Link
-            href={`${base}/get-involved/volunteer`}
-            className="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-[#1a2f50] to-[#142850] border-2 border-[#d4af37] rounded-lg hover:bg-[#d4af37] hover:text-[#0a1428] transition-all hover:scale-105"
+          <Link href={`${base}/get-involved/volunteer`} style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '20px 24px', background: 'linear-gradient(135deg, #1a2f50, #142850)', border: '2px solid #d4af37', borderRadius: '8px', textDecoration: 'none', color: 'white', transition: 'all 0.3s', cursor: 'pointer' }}
+            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#d4af37'; e.currentTarget.style.color = '#0a1428'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = ''; e.currentTarget.style.color = 'white'; }}
           >
-            <span className="text-3xl">🤝</span>
+            <span style={{ fontSize: '28px' }}>🤝</span>
             <div>
-              <div className="font-bold">{ar ? 'تطوع معنا' : 'Volunteer'}</div>
-              <p className="text-xs opacity-80">{ar ? 'شارك في مهمتنا' : 'Join our mission'}</p>
+              <div style={{ fontWeight: 'bold', fontSize: '15px', marginBottom: '2px' }}>{ar ? 'تطوع معنا' : 'Volunteer With Us'}</div>
+              <p style={{ fontSize: '12px', opacity: 0.9, margin: 0 }}>{ar ? 'شارك في مهمتنا' : 'Join our mission'}</p>
             </div>
           </Link>
 
-          <Link
-            href={`${base}/contact`}
-            className="flex items-center gap-3 px-6 py-4 bg-gradient-to-r from-[#1a2f50] to-[#142850] border-2 border-[#d4af37] rounded-lg hover:bg-[#d4af37] hover:text-[#0a1428] transition-all hover:scale-105"
+          <Link href={`${base}/contact`} style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '20px 24px', background: 'linear-gradient(135deg, #1a2f50, #142850)', border: '2px solid #d4af37', borderRadius: '8px', textDecoration: 'none', color: 'white', transition: 'all 0.3s', cursor: 'pointer' }}
+            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#d4af37'; e.currentTarget.style.color = '#0a1428'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = ''; e.currentTarget.style.color = 'white'; }}
           >
-            <span className="text-3xl">📞</span>
+            <span style={{ fontSize: '28px' }}>📞</span>
             <div>
-              <div className="font-bold">{ar ? 'اتصل بنا' : 'Contact Us'}</div>
-              <p className="text-xs opacity-80">{ar ? 'نحن هنا للمساعدة' : 'We\'re here to help'}</p>
+              <div style={{ fontWeight: 'bold', fontSize: '15px', marginBottom: '2px' }}>{ar ? 'اتصل بنا' : 'Contact Us'}</div>
+              <p style={{ fontSize: '12px', opacity: 0.9, margin: 0 }}>{ar ? 'نحن هنا للمساعدة' : 'We\'re here to help'}</p>
             </div>
           </Link>
         </div>
