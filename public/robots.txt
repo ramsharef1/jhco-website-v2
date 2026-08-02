@@ -1,0 +1,41 @@
+# JHCO Website Robots.txt
+# Crawl-delay and user-agent configuration
+
+User-agent: *
+Allow: /
+Allow: /ar/
+Allow: /en/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /gate/
+Disallow: /*.json$
+Disallow: /*?*sort=
+Disallow: /*?*page=
+Crawl-delay: 1
+Request-rate: 60/1h
+
+# Google Bot specific rules
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+Request-rate: 100/1h
+
+# Bing Bot
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+# Sitemap location
+Sitemap: https://jhco.org.jo/sitemap.xml
+Sitemap: https://jhco.org.jo/sitemap-ar.xml
+Sitemap: https://jhco.org.jo/sitemap-en.xml
